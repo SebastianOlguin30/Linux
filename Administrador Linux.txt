@@ -1,0 +1,61 @@
+Ubuntu-Client
+ub-client
+Linux.2023
+
+Ctrl+Alt+T: abrir terminal en ubuntu client
+###Actualizar dependencias
+sudo apt update
+###Actualizar forzado
+sudo apt update && sudo apt upgrade
+###Instalar SSH para conexiones remotas
+sudo apt install openssh-server -y
+sudo apt install ssh -y
+###Comando para crear archivos
+touch 
+
+###Que es la Shell
+Es la consola o terminal del sistema operativo
+
+###Variables de entorno
+SHELL: Define la shell q estamos usando ('echo $SHELL' imprimir variable de entorno, nos dice sobre q directorio se ejecuta)
+USER: Define usuario logueado en la shell ('echo $USER', nos dice el usuario q esta conectado actualmente en la shell
+PATH: Conjunto de rutas donde el sistema busca los ejecutables
+PWD: Muestra en q directorio nos encontramos 'echo $PWD'
+LANG: Almacena el codigo de lenguaje y codificacion 'echo $LANG'
+HOME: Almacena el home del usuario con el q estamos logueados en la shell /home/'user'
+LANGUAGE: Determina el lenguaje usado por el sistema 
+
+###Estructura de directorios
+/: Directorio raiz, almacena todo el SO
+/home: destinado alojar archivos personales de los usuarios del SO con excepcion del root (Desktop, Downloads, Images)
+/lib: Este directorio contiene bibliotecas compartidas que son necesarias para arrancar los ejecutables q se almacenan en directorios bin y sbin
+/mnt: montar dispositivos de almacenamiento (pendrive, disco duro)
+/opt: Almacena programas q no vienen con nuestro SO (teamviewer, spotify, netflix) lo instalado aqui queda para todos los usuarios.
+/proc: Se trata de un sistema de archvios virtual q nos proporciona informacion acerca de los distintos procesos y aplicaciones q se estan ejecutando en nuestro SO
+/boot: Es un directorio en el q se almacena el arranque del SO con excepcion de archivos de configuracion (kernel y gestor de arranques grub)
+/etc: Es un directorio q contiene los archvios de configuracion del SO, tambien tiene archivos de configuracion para cntrolar el funcionamiento de diversos programas (ejemplo Apache2)
+/root: Se encuentra la informacion del administrador de sistema|
+/sbin: Almacena archivos ejecutables binarios q solo pueden ser ejecutados por root, (init, reboot, shutdown)
+/tmp: se almacenan archivos temporales
+/usr: es el q contiene la mayoria de programas instalados en nuestro SO, es accesible para todos los usuarios ne modo lectura
+/var: Contiene los archivos de datos variables y temporales como los registros de sistemas (/var/cache, /var/log, /var/lib, /var/temp)
+/bin: Almacena archivos binarios ejecutables necesarios para el funcionamientos del sistema (cp, echo, mv, rm, cd, vim)
+
+###Comandos basicos
+Teclas rapidas: flechas para comandos anteriores, tabulador para autocompletar
+Ctrl+L o clear: Limpar pantalla
+echo: imprime (Se utiliza para programacion en bash)
+pwd: nos muestra en q directorio nos encontramos actualmente
+cd: comando para moverse entre directorios
+hostname: nos muestra el hostname del equipo
+man 'comando': Nos muestra informavion del comando consultado (para salir apretar Q)
+cat: muestra la informacion q se encuentra dentro de un archivo
+touch: Para crear archivos nuevos
+ls: lista lo que tenemos actualmente dentro del directorio donde estamos (opciones ls -l(lista ordenado), ls -h(muestra la info mas especifico), ls -a(muestra archvios ocultos tambien)
+mkdir: comando para crear directorios
+rmdir: comando para eliminar directorios (solo si el directorio esta vacio)
+rm -R: elimina el directorio y subdirectorios
+pushd: 
+tail: muestra las utlimas 10 lineas q tiene un archivo
+head: muestra las 10 primeras lineas q tiene un archivo
+'comando' --help: Nos muestra ayuda sobre el comando ingresado

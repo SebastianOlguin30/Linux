@@ -1,0 +1,99 @@
+###Configurar SSH
+sudo apt install ssh -y
+
+### Actualizar repositorios
+sudo apt update
+sudo apt install mysql-server -y
+
+###Configurar usuario MySQL
+sudo mysql
+
+alter user 'root'@'localhost'identified with mysql_native_password by 'ubuntu'
+flush privileges;
+
+Configurando subdominios linux
+
+Dentro de /var/www$
+sudo mkdir admin_linux
+
+o directo en la raiz
+sudo mkdir /var/www/admin_linux
+
+permisos
+sudo chown -R www-data:www-data /var/www/admin_linux
+sudo nano /var/www/admin_linux/index.html
+
+###Cambiando directorio
+cd /etc/apache2/sites-available/
+
+touch administradorlinux.com
+sudo nano administradorlinux.com
+
+###Cambiar nombre archivo
+sudo mv administradorlinux.com administradorlinux.com.conf
+
+##Contenido archivo administradorlinux.com.conf
+<VirtualHost *:80>
+ServerName administradorlinux.com
+ServerAlias www.administradorlinux.com
+DocumentRoot /var/www/admin_linux/
+</VirtualHost>
+
+###Quitar pagina por default
+sudo a2dissite 000-default.conf
+sudo systemctl reload apache2
+
+###Configutar nuevo sitio administradorlinux.com.conf
+sudo a2ensite administradorlinux.com.conf
+sudo systemctl reload apache2
+
+###Instalando php 8
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php8.2 -y
+php --v
+
+###Instalar paquetes para php
+sudo apt install php8.2-{bcmath,xml,fpm,mysql,zip,intl,ldap,gd,cli,bz2,curl,mbstring,pgsql,opcache,soap,cgi}
+
+###Configuracion php en servidor
+sudo nano /etc/php//8.2/apache2/php.ini
+sudo nano /etc/apache2/mods-enabled/dir.conf
+sudo service apache2 restart
+
+###Instalando Moodle
+cd /var/www/
+sudo wget https://packaging.moodle.org/stable403/moodle-latest-403.zip
+###instalar zip y unzip
+sudo apt install zip unzip -y
+sudo unzip moodle-latest-403.zip
+cd /var/www/moodle/
+sudo cp -r * /var/www/admin_linux/
+###DB Moodle
+mysql -u root -p
+dentro de SQL: create database moodle;
+create user 'u_moodle'@'localhost' identified with mysql_native_password by 'u_moodle';
+grant all on moodle.* to 'u_moodle'@'localhost';
+flush privileges;
+exit;
+###Creacion carpeta de archivos moodle
+sudo mkdir -p /opt/archivos_moodle
+sudo chown www-data:www-data -R /var/www/admin_linux/
+sudo chown www-data:www-data -R /opt/archivos_moodle/
+
+Instalar desde pagina web:
+usuario: admin
+password: Admin_2023
+
+###Respaldo DB
+mysqldump -u root -pubuntu --all-databases > /home/ubuntu/bd.sql
+
+sudo nano script.sh
+
+fecha=$(date +%d-%m-%Y)
+mysqldump -u root -pubuntu --all-databases > /home/ubuntu/bd.sql
+zip $fecha.zip bd.sql
+
+https://crontab.guru/
+https://crontab-generator.org/
+* * * * * /usr/bin/bash /home/ubuntu/script.sh
