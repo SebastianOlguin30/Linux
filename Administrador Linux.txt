@@ -275,3 +275,9 @@ sudo apt install nginx
 el sitio por defautl es 'localhost'
 para q el sitio este disponible, debe estar en las rutas /etc/nginx/sites-avaliable /etc/nginx/sites-enabled (link relativo)
 Para ocultar la version de nginx en la ruta /etc/nginx/ en el archivo nginx.conf debemos quitar el # a la linea server_tokens off; 
+
+#SSL
+sudo apt install ss-cert -y
+sudo make-ss-cert generate-default-snakeoil
+habilitar los puertos 443 y 'include snippets/snakeoil.conf;' en /etc/nginx/sites-avaliable en el archivo 'default'
+Reiniciar nginx con 'sudo service nginx restart'
