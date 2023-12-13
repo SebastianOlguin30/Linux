@@ -59,3 +59,203 @@ pushd:
 tail: muestra las utlimas 10 lineas q tiene un archivo
 head: muestra las 10 primeras lineas q tiene un archivo
 'comando' --help: Nos muestra ayuda sobre el comando ingresado
+
+###Permisos de usuario, grupos, archivos y directorios
+R: lectura
+W: Escritura
+X: Ejecucion
+Los permisos se muestran en 3 bloques:
+B1: Individual (Quien crea le archivo, dueño)
+B2: Grupo
+B3: El resto del sistema
+CHMOD: Nos permite hacer cambio sobre los permisos de archivos y directorios
+R: 4
+W: 2
+X: 1
+RWX: 7
+RW: 6
+RX: 5
+R: 4
+WX: 3
+W: 2
+X: 1
+Quitar permisos: 0
+EJEMPLO1: chmod 774 /home/ub-client/Desktop/Hola_Mundo.txt (Permisos dueño RWX, Grupo RWX, resto R--)
+EJEMPLO2: chmod 700 /home/ub-client/Desktop/Hola_Mundo.txt (Permisos dueño RWX, Grupo ---, resto ---)
+
+###Ejercicios
+ejercicio01 - RW for all = chmod 666 ejercicio01
+texto02.txt - RW solo Owner = chmod 600 ejercicio01/ejercicio02/texto02.txt
+texto03.txt - R for all = chmod 444 ejercicio01/ejercicio02/texto03.txt
+
+###Uso avanzado CHMOD
+Conjunto de permisos:
+U: Propietario
+G: Grupo
+O: Global
+A: Todos
+Tipo de cambio
++: Agregar
+-: Quitar
+=: Igualar
+
+Ejemplos:
+chmod a+x archivo.sql (brinda permisos de ejecucion para todos los usuarios)
+chmod ug=rw script.py (iguala los permisos de owner y grupo a RW)
+chmod o-rwx programa.sh (quita permisos RWX a otros usuarios)
+chmod g=u log.txt (iguala los permisos de grupo a los permisos de owner)
+chmod g-w,o-rw pass.txt (quita permisos de escritura para el grupo, y quita permisos de lectura y escritura para otros usuarios)
+chmod a=u user.txt (iguala los permisos de todos a los del owner)
+
+###Gestion de Usuarios y Grupos
+#Usuarios
+adduser nombreusuario : Crear usuario (almacena al usuario en 'cat /etc/passwd' se puede ver a q grupo pertenece)
+passwd nombreusuario : asignar password a usuario
+#Grupos
+addgroup nombregrupo : Crear grupo (Le asigna un numero de grupo q se puede ver con 'cat /etc/group')
+#Asignacion de usuarios a Grupos
+usermod nombreusuario -g nombregrupo
+#Eliminar usuario
+userdel nombreusuario
+#Eliminar grupo
+groupdel nombregrupo
+
+sudo kill -9 (matar proceso forzado)
+#Cambiar el propietario de un archivo o fichero, CHOWN
+chown [opcion] [nuevo_propietario]:[nuevo_grupo] fichero 
+#Cambiar grupo de un archivo o fichero, CHGRP
+chgrp [opcion] [nuevo_grupo] fichero
+
+chown -R bobesponja:fondo_de_bikini Prueba (Se asigna como dueño a bobesponja y al grupo fondo_de_bikini al directorio Prueba y todas sus subcarpetas con -R)
+
+###Encontrar directorios y ficheros
+sudo apt install mlocate (instalacion locate)
+locate nombrearchivo
+locate nombrefichero
+find [directorio] [opcion] [archivo]
+find -name prueba.txt
+find -name Hola (Busca directorio 'Hola' dentro del directorio posicionado)
+find -iname hola (Busca directorio 'hola' sin importar mayusc y minusc)
+find -user patricio (Busca todos lso directorios y ficheros que pertenezcan a patricio)
+find -group fondo_de_bikini (busca todos los directorios o ficheros q pertenezcan al grupo fondo_de_bikini)
+find / -iname passwd (Busca en la raiz / cualquier fichero o directorio con la palabra 'passwd' sin importar mayusc o minusc)
+find /etc -iname passwd (busca en le directorio etc /etc cualquier fichero o directorio con la palabra 'passwd' sin importar mayusc o minusc)
+#Usos avanzados de find
+todo con excepcion de: find -not -iname archivo.sql
+Cuando encuentre un archivo lo elimine: find -name eliminame.txt -delete}
+busqueda por extensiones: find -name "*.txt"
+te deja buscar por ultima modificacion: find -mmin 1
+buscar por tamaño archivo: find -size 0
+buscar por permisos: find -perm 755
+buscar por permisos o menos: find -perm -755 
+find / -type f -name [a,b,c,d,e,f]pache2 : Busca en la raiz archivo tipo file con nombre apache, bpache, cpache, dpache,epache, fpache)
+find ./ -name *.txt : Buscara todos los archivos con extension txt
+###Gestion de ficheros
+#Visualizar ficheros
+cat
+root@ub-client:/home/ub-client/Desktop# cat hola.txt
+cat -n nos muestra los numeros de lineas
+root@ub-client:/home/ub-client/Desktop# cat -n hola.txt
+head (-n mostrar n cantidad de lineas) (sin - n muestra las primeras 10 lineas)
+root@ub-client:/home/ub-client/Desktop# head -2 hola.txt
+tail (-n mostrar n cantidad de lineas finales) (sin -n muestra las ultimas 10 lineas)
+uniq (No muestra lineas repetidas)
+sort (-r al reves) (ordena el contenido alfabeticamente)
+#Editar ficheros con VIM
+vim nombrearchivo
+dentro de vim para editar debemos apretar la tecla 'i'
+para salir apretamos la tecla 'esc'
+para guardar la letra :W en modo visualizacion
+y para salir la letra :Q
+:wq guardar y salir
+:wq! guardar y salir forzado
+en modo visualizacion podemos usar las teclas 'hjkl' para movernos
+en modo visulizacion podemos usar la tecla 'W' para movernos a la primera letra de la siguiente palabra
+en modo visulizacion podemos usar la tecla 'E' para movernos a la ultima letra de la siguiente palabra
+en modo visulizacion podemos usar la tecla 'B' para movernos a la primera letra de la anterior palabra
+en modo visulizacion podemos usar la tecla 'B' para movernos a la primera letra de la anterior palabra
+en modo vis doble 'GG' para ir al comienzo del archivo
+en modo vis 'Ngg' nos lleva a la N linea 
+en modo vis con 0 me muevo al principio de la linea
+en modo vis con $ me muevo al final de la linea
+en modo vis con * me mueve a la siguiente palabra igual a la q estoy posicionado
+en modo vis con Y copio la linea q estoy posiicionado y con P la pego
+en modo vis con yw copias la palabra
+en modo vis con doble D elimino la linea
+en modo vis la letra U es como un ctrl+z
+
+#Editar ficheros con GEDIT
+es el editor de texto de Linux con interfaz grafica
+
+#Gestion de ficheros por comandos
+cp [rutaFichero] [rutaDondePegar] (-p copia atributos, -r recursividad)
+mv [rutaFichero] [rutaDondeMover] 
+rm [rutaArchivoaEliminar] (-r recursivo, -f forzar eliminacion)
+scp usuario@host:ruta 
+
+sudo cp -p prueba.txt .. (Copia el archivo prueba con sus permisos en la carpeta anterior)
+scp [archivo.ext] user@host/ip:[ruta]
+scp prueba.txt ub-client@192.168.1.76:/home/ub-client/Desktop
+
+###Standares STDIN, STDOUT y STDERR
+STDIN: Standard input
+STDOUT: Standard output
+STDERR: Standard error
+
+###Redirecciones <>
+cat hola.txt > hola2.txt : el stdout de 'cat hola.txt' quedara guardado en 'hola2.txt'
+ping 192.168.1.81 > log.txt : El resultado del ping quedara guardado en el archivo log.txt, si el archivo ya existe, lo sobreescribira
+ping 192.168.1.92 >> log.txt : con doble > agrega el resultado del ping abajo, no sobreescribe
+cat hola 2> prueba.txt : En este caso q arrojaria error pq hola es un directorio con 2> se guarda el stderr en prueba.txt
+
+###Tuberias
+cat hola.txt | wc : tomara la stdout de cat hola.txt y contara las lineas con wc
+
+###Busqueda de texto GREP
+El programa mas utilizado para busqueda de texto en el stdout de un comando grep
+grep [opcion] [palabra] [ruta]
+	c: cuenta las lineas en las q aparece la busqueda
+	i: ignora mayusculas y minusculas
+	v: busca las lineas donde no hay coincidencia
+cat hola.txt | grep PING
+cat log.txt | grep bytes : Mostrara todas las lineas donde aparece la palabra buscada y la maracra en rojo.
+cat log.txt | grep -i BYTES : con -i buscara la palabra sin importar mayusc y minusc
+cat log.txt | grep -c ms : con -c grep me devolvera el numero de lineas donde aparece la palabra buscada
+cat log.txt | grep -v ms : con -v grep me devolvera todas las lineas donde NO aparezca la palabra mencionada.
+#EXpresiones regulares
+^: Inicio de linea
+$: final de linea
+. : cualquier caracter
+* : cualquier secuencia de caracteres
+[] : cualquier caracter dentro de los corchetes
+#Ejemplos
+cat log.txt | grep ^6 : nos mostrara todas las lineas q comiencen con 6
+locate hola | grep .txt$ : buscara todos los archivos con la plabra hola con extension txt
+cat log.txt | grep ms$ : Busca todas las lienas q finalicen con ms
+cat log.txt | grep err.rs : el punto reemplaza al caracter
+cat log.txt | grep statist.cs : el punto reemplaza al caracter
+cat log.txt | grep static* : devolvera cualquier palabra q comience con static...
+cat log.txt | grep icmp_seq=1 : devolvera las lineas q contengan 1 despues del igual
+cat log.txt | grep icmp_seq=. : devolvera las lineas q contengan cualquier caracter despues del igual
+cat log.txt | grep 192.168.1.* : devolvera todas las lineas q conetngan 192.168.1
+cat log.txt | grep 192.168.1.[173,47]
+
+###APT Advance Packing Tools
+cat /etc/apt/sources.list
+apt-cache search [aplicacion] : Busqueda de aplicaciones
+apt-get update : Actualiza los repositorios
+apt-get upgrade: Ejecuta una actualizacion parcial del sistema
+apt-get dist-upgrade: Actualiza todos los paquetes
+apt-get install [aplicacion]: Instala un paquetes
+apt-get remove [aplicacon]: elimina un paquetes (para eliminar los ficheros de configuracion agregamos la opcion --purge 'apt-get remove --purge [aplicacion]')
+sudo apt remove python3.11-doc: Eliminara el paquete de python3.11-doc
+apt-get autoremove: Elimina paquetes que han sido instalados automaticamente como dependencias y ya no estan en uso.
+
+### Monitoreo de procesos PS
+PS -A -e: Para ver todos los procesos
+PS -x: Para ver los procesos especificos del usuario que ejecuto PS
+PS -u [usuario]: Para ver los procesos de un usuario especifico
+PS --forest: Para mostrar la jerarquia de procesos
+PS aux: Muestra todos los procesos detalladamente
+PID: Process ID, Identificador unico del proceso
+kill -9 8719: con kill matamos el proceso con -9 lo forzamos y 8719 es el PID del proceso a matar
