@@ -183,6 +183,7 @@ en modo vis con Y copio la linea q estoy posiicionado y con P la pego
 en modo vis con yw copias la palabra
 en modo vis con doble D elimino la linea
 en modo vis la letra U es como un ctrl+z
+en modo vis con / seguido de un string podemos realziar busquedas, y con n nos lleva a la siguiente busqueda
 
 #Editar ficheros con GEDIT
 es el editor de texto de Linux con interfaz grafica
@@ -259,3 +260,18 @@ PS --forest: Para mostrar la jerarquia de procesos
 PS aux: Muestra todos los procesos detalladamente
 PID: Process ID, Identificador unico del proceso
 kill -9 8719: con kill matamos el proceso con -9 lo forzamos y 8719 es el PID del proceso a matar
+
+###Monitoreo de procesos con TOP
+q: Salir
+p [PID]: Monitorizar proceso especifico
+k: para matar un proceso
+
+###Monitoreo de procesos con HTOP
+sudo apt install htop: para instalar HTOP
+
+###NGINX
+Servidor de aplicaciones web como Apache2 o IIS
+sudo apt install nginx
+el sitio por defautl es 'localhost'
+para q el sitio este disponible, debe estar en las rutas /etc/nginx/sites-avaliable /etc/nginx/sites-enabled (link relativo)
+Para ocultar la version de nginx en la ruta /etc/nginx/ en el archivo nginx.conf debemos quitar el # a la linea server_tokens off; 
