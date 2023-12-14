@@ -1,0 +1,17 @@
+Un shell script es un archivo de texto que contiene una serie de comandos
+
+Para crear un script debe iniciar con '#!/bin/bash'
+
+nano day1.sh : Para crear archivo script
+#Dentro del archivo day1.sh escribir
+
+#!/bin/bash
+echo "i don't have to be great to start, but I have to start to be great"
+#Damos permisos de ejecucion al script
+chmod +x day1.sh
+
+#day2.sh
+vim day2.sh
+#!/bin/bash
+SKILL="shell scripting" = Esto es una variable
+echo "I want to be good at ${SKILL}. That's why I practice ${SKILL}." = Las variables se invocan con ${variable}

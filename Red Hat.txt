@@ -1,0 +1,11 @@
+Sistema Operativo CentOS
+Instalacion with GUI
+2 discos: 18gb y 2gb
+Filesystem: ext4
+Particionamiento
+/				7GB
+/tmp			2GB
+/var			2GB
+/var/log		2GB
+/var/log/audit	2GB
+/home			2GB

@@ -1,0 +1,6 @@
+Instalar con interfaz grafica
+particionar el disco:
+	/ : en la raiz para SO
+	/var/lib : Para DB
+	/var/www : Para sitios web (apache)
+Se debe instalar GRUB
