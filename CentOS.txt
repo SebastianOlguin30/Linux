@@ -1,0 +1,18 @@
+root
+Centos.2023
+sebastian
+Centos.2023
+
+comando nmtui para dministrar conexiones de red de forma grafica
+usermod -aG wheel sebastian = Para agregar usuario estandar al grupo wheel y pueda ejecutar comandos con permisos de admin
+sudo yum install epel-release = Para instalar Extra Packages for Enterprise Linux repositorio
+sudo yum install ansible = Para instalar ansible
+ansible --version = para comprobar la version de ansible
+
+###Configurar archivo ansible.cfg
+vim /etc/ansible/ansible.cfg = Para entrar al rchivo de configuracion de ansible
+[defaults]
+
+#some basic default values
+
+inventory	= /etc/sysadmin/inventory
