@@ -9,9 +9,105 @@ nano day1.sh : Para crear archivo script
 echo "i don't have to be great to start, but I have to start to be great"
 #Damos permisos de ejecucion al script
 chmod +x day1.sh
+./day1.sh = Para ejecutar script
 
 #day2.sh
 vim day2.sh
 #!/bin/bash
-SKILL="shell scripting" = Esto es una variable
-echo "I want to be good at ${SKILL}. That's why I practice ${SKILL}." = Las variables se invocan con ${variable}
+SKILL="shell scripting" = Esto es una variable, debe asignarse el valor sin espacios despues del signo igual =
+echo "I want to be good at ${SKILL}. That's why I practice ${SKILL}." = Las variables se invocan con ${variable} = echo imprime el valor dentro de las comillas, las comillas deben ir separadas de un espacio despues de echo
+sudo chmod +x day2.sh
+./day2.sh
+
+#Reglas sobre variables de SCRIPT
+Los nombres de variables pueden contener letras, digitos y guion bajo. Pero solo pueden comenzar con letras o guion bajo. no puede iniciar con un digito.
+EJEMPLOS VALIDOS DE NOMBRE DE VARIABLE:
+SKILL
+SKILL1
+_SKILL
+EJEMPLOS NO VALIDOS DE NOMBRE DE VARIABLE:
+3SKILL
+A-SKILL
+E@EMAIL
+
+Por convencion y no por regla de sintaxis los nombres de variables son todos en mayuscula, esto para poder identificar rapidamente las variables en un script.
+Se puede usar minusuclas y camelCase porque las maysuculas son solo por convencion y no una regla.
+EJEMPLOS VALIDOS:
+skill
+Skill
+ASkill
+
+Para referenciar una variable por nombre debes encerrar el nombre en parentesis de llave {} precedido de un signo dolar: ${VARIABLE}
+Otra forma menos estricta de usar variables es solo precederla de un signo dolar, omitiendo los parentesis de llave. $VARIABLE
+echo "I want to be good at $SKILL. That's why I practice $SKILL." No es recomnedable pq si debemos concatenar palabras se cae el script
+
+#Ejemplo day3.sh
+
+sudo vim day3.sh
+
+!/bin/bash
+WORD="script"
+echo "${WORD}ing is fun": resultado = scripting is fun, funciona la concatenacion.
+echo "$WORDing is fun": resultado ing is fun, no funciona pq la variable WORDing no existe.
+
+WORD, Word, word = Son diferentes variables, si declaras la variable en mayuscula debes invocarla exactamente igual.
+
+#Reasignacion de variable
+
+!/bin/bash
+WORD="script"
+echo "${WORD}ing is fun!"
+WORD="read": Asigna el nuevo valor "read" a la variable WORD.
+echo "${WORD}ing is fun!"
+
+Para crear comentarios en nuestro script debemos comenzar con gato #
+
+#Escribir scripts largo y complicados
+
+Para escribir script largos y complicados de recomienda usar pseudocodigo, comenzar con comentarios q describan cada paso del script y despues escribirlo en codigo sh
+
+sudo vim sysinfo.sh
+
+#!/bin/bash
+
+# This script displays information about the system on which it is executed. : Describe loq hace este script
+
+# Tell the user the script is starting. : Describe lo q hace el primer paso, indica al usuario q el script comenzo a ejecutarse
+echo "Starting the sysinfo script"
+
+# Display the hostname of the system. : Describe loq  hace el segundo paso, muestra el nombre del host
+hostname
+
+# Display the current date and time when this information was collected. : Describe loq hace el paso 3, muestra la fecha y hora de cuando se recolecto la informacion
+date
+
+# Display the kernel release followed by the architecture. : Describe el paso 4, muestra la version del kernel y arquitectura del SO.
+uname -r : Muestra el kernel.
+uname -m : Muestra la arquitectura.
+
+# Display the disk usage in a human readable format. : Describe el paso 5, muestra el uso de disco en formato para humanos.
+df -h
+
+# End the script by letting the user know that it's done.
+echo "Stopping the sysinfo script"
+
+###TOMA DE DECISIONES EN TU SCRIPT Y USO DE VARIABLES INCORPORADAS EN SHELL.
+sudo vim got-root.sh
+
+#!/bin/bash
+
+# Determine if the user executing this script is the root user or not.
+
+# Display the UID
+echo "Your UID is ${UID}."
+
+# Display if the user is the root user or not.
+if [[ "${UID}" -eq 0 ]]
+then
+  echo "You are root."
+else
+  echo "You are not root."
+fi
+
+sudo chmod +x got-root.sh
+./got-root.sh
